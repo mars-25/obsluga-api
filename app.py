@@ -10,10 +10,12 @@ def get_exchange_rates():
     data = response.json()
     return {rate["code"]: rate["ask"] for rate in data[0]["rates"]}
 
-exchange_rates = get_exchange_rates()  # Pobranie kursów przy starcie aplikacji
+#exchange_rates = get_exchange_rates() # Pobranie kursów przy starcie aplikacji
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    exchange_rates = get_exchange_rates() #Pobieranie kursów za każdym razem ALE CZY NIE TRZEBA ODŚWIEŻYĆ STRONY?
+
     total_pln = None
 
     if request.method == "POST":
